@@ -1,39 +1,56 @@
 package ru.netology.Radio;
 
 public class Radio {
+    private int maxAmountWave = 10;
     private int currentWave;
     private int currentVolume;
+
+    public Radio(int maxAmountWave) {
+        this.maxAmountWave = maxAmountWave;
+    }
+
+    public Radio() {
+    }
 
     public int getCurrentWave() {
         return currentWave;
     }
 
-    public void setCurrentWave(int newCurrentWave) {
-        if (newCurrentWave > 9) {
-            newCurrentWave = 0;
+    public int setMaxAmountWave(int maxAmountWave) {
+        this.maxAmountWave = maxAmountWave;
+        return this.maxAmountWave;
+    }
+
+    public int getMaxAmountWave() {
+        return maxAmountWave - 1;
+    }
+
+    public void setCurrentWave(int currentWave) {
+        if (currentWave > maxAmountWave - 1) {
+            this.currentWave = 0;
+            return;
         }
-        if (newCurrentWave < 0) {
-            newCurrentWave = 9;
+        if (currentWave < 0) {
+            this.currentWave = getMaxAmountWave();
+            return;
         }
-        currentWave = newCurrentWave;
+        this.currentWave = currentWave;
     }
 
     public void nextWave() {
-        if (currentWave < 9) {
-            currentWave = currentWave + 1;
-        }
+       setCurrentWave(currentWave + 1);
     }
+
     public void prevWave() {
-        if (currentWave < 9) {
-            currentWave = currentWave - 1;
-        }
+        setCurrentWave(currentWave - 1);
     }
+
     public int getCurrentVolume() {
         return currentVolume;
     }
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > 10) {
+        if (currentVolume > 100) {
             return;
         }
         if (currentVolume < 0) {
@@ -41,10 +58,12 @@ public class Radio {
         }
         this.currentVolume = currentVolume;
     }
+
     public void volumeUp() {
         setCurrentVolume(currentVolume + 1);
     }
+
     public void volumeDown() {
         setCurrentVolume(currentVolume - 1);
-        }
     }
+}
